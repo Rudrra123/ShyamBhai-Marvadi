@@ -5,7 +5,6 @@ from models import FormRequest
 from pdf_generator import create_pdf
 from excel_generator import create_excel
 from fastapi.middleware.cors import CORSMiddleware
-import os
 
 app = FastAPI()
 
@@ -17,11 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# ===== Serve Static UI =====
-# Make sure your HTML file is inside: static/index.html
-app.mount("/", StaticFiles(directory="Static", html=True), name="static")
-
 
 # ===== PDF API =====
 @app.post("/pdf")
@@ -51,3 +45,7 @@ def excel(req: FormRequest):
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         filename="measurement.xlsx"
     )
+
+
+# ✅ STATIC MOUNT LAST
+app.mount("/", StaticFiles(directory="Static", html=True), name="static")
