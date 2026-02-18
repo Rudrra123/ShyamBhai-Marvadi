@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Measurement Sheet</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* ===== HEADER BOXES ===== */
+    .header-box {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    .header-box td {
+      border: 1px solid black;
+      padding: 6px;
+      vertical-align: middle;
+    }
+
+    .label {
+      width: 180px;
+      font-weight: bold;
+      text-align: center;
+      background: #f5f5f5;
+    }
+
+    .value input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* ===== MAIN TABLE ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      text-align: center;
+      padding: 4px;
+    }
+
+    th {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      text-align: center;
+    }
+
+    .qty {
+      background: #f5f5f5;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 4px 10px;
+      margin: 5px 0;
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h3>
+  Measurement Sheet<br>
+  <small>માપ પત્રક</small>
+</h3>
+
+<!-- ===== HEADER ===== -->
+<table class="header-box">
+  <tr>
+    <td class="label">Name<br>નામ</td>
+    <td class="value"><input id="name"></td>
+  </tr>
+  <tr>
+    <td class="label">Name of Work<br>કામનું નામ</td>
+    <td class="value"><input id="work"></td>
+  </tr>
+</table>
+
+<!-- ===== MAIN TABLE ===== -->
+<table id="tbl">
+  <thead>
+    <tr>
+      <th>Item Description<br>વિગત</th>
+      <th>Number<br>સંખ્યા</th>
+      <th>Length<br>લંબાઈ</th>
+      <th>Breadth<br>પહોળાઈ</th>
+      <th>Depth<br>ઊંડાઈ</th>
+      <th>Quantity<br>જથ્થો</th>
+      <th>❌</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div class="actions">
+  <button onclick="addRow()">+ Add Row</button>
+</div>
+
+<h4>Total Quantity (કુલ જથ્થો): <span id="total">0</span></h4>
+
+<button onclick="generatePDF()">Generate PDF</button>
+
+<script>
+function addRow() {
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td><input placeholder="Item description"></td>
+    <td><input type="number" value="1"></td>
+    <td><input type="number"></td>
+    <td><input type="number"></td>
+    <td><input type="number"></td>
+    <td><input class="qty" readonly></td>
+    <td><button onclick="this.closest('tr').remove(); calc()">X</button></td>
+  `;
+
+  tr.querySelectorAll("input").forEach(i => i.oninput = calc);
+  document.querySelector("#tbl tbody").appendChild(tr);
+}
+
+function calc() {
+  let total = 0;
+
+  document.querySelectorAll("#tbl tbody tr").forEach(tr => {
+    const i = tr.querySelectorAll("input");
+
+    const qty =
+      (Number(i[1].value) || 0) *
+      (Number(i[2].value) || 0) *
+      (Number(i[3].value) || 0) *
+      (Number(i[4].value) || 0);
+
+    i[5].value = qty;
+    total += qty;
+  });
+
+  document.getElementById("total").innerText = total;
+}
+
+function generatePDF() {
+  const rows = [];
+
+  document.querySelectorAll("#tbl tbody tr").forEach(tr => {
+    const i = tr.querySelectorAll("input");
+    rows.push({
+      item: i[0].value,
+      no: +i[1].value,
+      length: +i[2].value,
+      breadth: +i[3].value,
+      depth: +i[4].value,
+      quantity: +i[5].value
+    });
+  });
+
+  fetch("http://127.0.0.1:8000/pdf", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      header: {
+        name: document.getElementById("name").value,
+        work_name: document.getElementById("work").value
+      },
+      rows: rows,
+      total: +document.getElementById("total").innerText
+    })
+  })
+  .then(r => r.blob())
+  .then(b => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(b);
+    a.download = "measurement.pdf";
+    a.click();
+  });
+}
+
+addRow(); // first row
+</script>
+
+</body>
+</html>
