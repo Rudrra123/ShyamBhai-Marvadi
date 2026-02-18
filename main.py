@@ -30,7 +30,7 @@ def pdf(req: FormRequest):
     with open("output.pdf", "rb") as f:
         pdf_bytes = f.read()
 
-    return Response(
+    return FileResponse(
         content=pdf_bytes,
         media_type="application/pdf",
         headers={
