@@ -63,7 +63,7 @@ def draw_header_background(canvas, doc):
     # ===== LOGO (Left) =====
 
     canvas.drawImage(
-        "images/logo.png",
+        "Images/logo.png",
         x=10,
         y=PAGE_HEIGHT - header_height + (header_height - logo_height) / 2,
         width=logo_width,
@@ -104,7 +104,7 @@ def draw_header_background(canvas, doc):
     watermark_height = 500
 
     canvas.drawImage(
-        "images/logo.png",
+        "Images/logo.png",
         x=(PAGE_WIDTH - watermark_width) / 2,
         y=(PAGE_HEIGHT - watermark_height) / 2,
         width=watermark_width,
