@@ -27,12 +27,16 @@ def pdf(req: FormRequest):
         header=req.header
     )
 
-    return FileResponse(
-        "output.pdf",
-        media_type="application/pdf",
-        filename="measurement.pdf"
-    )
+    with open("output.pdf", "rb") as f:
+        pdf_bytes = f.read()
 
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": "attachment; filename=measurement.pdf"
+        }
+    )
 
 # ===== EXCEL API =====
 @app.post("/excel")
