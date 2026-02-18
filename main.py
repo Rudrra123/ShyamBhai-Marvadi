@@ -20,7 +20,7 @@ app.add_middleware(
 
 # ===== Serve Static UI =====
 # Make sure your HTML file is inside: static/index.html
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+app.mount("/", StaticFiles(directory="Static", html=True), name="static")
 
 
 # ===== PDF API =====
