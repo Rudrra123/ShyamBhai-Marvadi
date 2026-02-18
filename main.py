@@ -5,6 +5,7 @@ from models import FormRequest
 from pdf_generator import create_pdf
 from excel_generator import create_excel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 
 app = FastAPI()
 
@@ -30,13 +31,14 @@ def pdf(req: FormRequest):
     with open("output.pdf", "rb") as f:
         pdf_bytes = f.read()
 
-    return FileResponse(
+    return Response(
         content=pdf_bytes,
         media_type="application/pdf",
         headers={
             "Content-Disposition": "attachment; filename=measurement.pdf"
         }
     )
+
 
 # ===== EXCEL API =====
 @app.post("/excel")
