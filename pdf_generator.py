@@ -310,16 +310,36 @@ def create_pdf(rows, total, header):
     elements.append(Spacer(1, 25))
 
     # ================= FOOTER =================
-    elements.append(HRFlowable(width="100%", thickness=1))
-    elements.append(Spacer(1, 10))
+    elements.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor("#b5b5b5")))
+    elements.append(Spacer(1, 15))
 
-    footer_para = Paragraph(
-        "Authorized Signature ____________________________<br/><br/>"
-        "Thank You For Your Business",
-        box_text
+    sig_style = ParagraphStyle(
+        name="SignatureStyle",
+        fontName="Gujarati",
+        fontSize=10,
+        alignment=2  # Right aligned
     )
+    signature_para = Paragraph(
+        "Authorized Signature ____________________________",
+        sig_style
+    )
+    elements.append(signature_para)
 
-    elements.append(footer_para)
+    elements.append(Spacer(1, 30))
+
+    thank_you_style = ParagraphStyle(
+        name="ThankYouStyle",
+        fontName="Helvetica-Oblique",
+        fontSize=8,
+        textColor=colors.HexColor("#4a4a4a"),
+        alignment=1  # Center aligned
+    )
+    thank_you_para = Paragraph(
+        "Thank You For Your Business",
+        thank_you_style
+    )
+    elements.append(thank_you_para)
+
 
     # ================= BUILD =================
     pdf.build(
