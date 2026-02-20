@@ -1,324 +1,350 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Aadesh Construction - Measurement Sheet</title>
+  <meta charset="UTF-8">
+  <title>Aadesh Construction - Measurement Sheet</title>
 
-<style>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ececec;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+      /* remove horizontal scroll */
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background:#ececec;
-  margin:0;
-  padding:20px;
-  overflow-x:hidden; /* remove horizontal scroll */
-}
+    /* ===== MAIN CONTAINER ===== */
+    .container {
+      background: #fff;
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
 
-/* ===== MAIN CONTAINER ===== */
-.container {
-  background:#fff;
-  max-width:1100px;
-  margin:auto;
-  padding:30px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.08);
-}
+    /* ===== HEADER ===== */
+    .company-header {
+      text-align: center;
+    }
 
-/* ===== HEADER ===== */
-.company-header {
-  text-align:center;
-}
+    .company-header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
 
-.company-header h1 {
-  margin:0;
-  font-size:28px;
-  letter-spacing:1px;
-}
+    .company-header h3 {
+      margin: 6px 0 15px;
+      font-weight: normal;
+      color: #555;
+    }
 
-.company-header h3 {
-  margin:6px 0 15px;
-  font-weight:normal;
-  color:#555;
-}
+    .line {
+      border-bottom: 2px solid #333;
+      margin-bottom: 25px;
+    }
 
-.line {
-  border-bottom:2px solid #333;
-  margin-bottom:25px;
-}
+    /* ===== CLIENT / PROJECT TABLE ===== */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
 
-/* ===== CLIENT / PROJECT TABLE ===== */
-.info-table {
-  width:100%;
-  border-collapse:collapse;
-  margin-bottom:20px;
-}
+    .info-table th {
+      background: #f3f3f3;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-weight: 600;
+    }
 
-.info-table th {
-  background:#f3f3f3;
-  padding:10px;
-  border:1px solid #ccc;
-  font-weight:600;
-}
+    .info-table td {
+      border: 1px solid #ccc;
+      padding: 15px;
+      vertical-align: top;
+    }
 
-.info-table td {
-  border:1px solid #ccc;
-  padding:15px;
-  vertical-align:top;
-}
+    /* Proper side layout */
+    .field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
 
-/* Proper side layout */
-.field {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
+    .field label {
+      font-weight: 600;
+    }
 
-.field label {
-  font-weight:600;
-}
+    .field input {
+      width: 65%;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 4px;
+    }
 
-.field input {
-  width:65%;
-  border:none;
-  border-bottom:1px solid #ccc;
-  padding:4px;
-}
+    .field input:focus {
+      outline: none;
+      border-bottom: 1px solid #333;
+    }
 
-.field input:focus {
-  outline:none;
-  border-bottom:1px solid #333;
-}
+    /* ===== BUTTONS ===== */
+    .actions {
+      margin: 15px 0;
+    }
 
-/* ===== BUTTONS ===== */
-.actions {
-  margin:15px 0;
-}
+    button {
+      padding: 8px 18px;
+      margin-right: 8px;
+      cursor: pointer;
+      border: 1px solid #999;
+      background: #f5f5f5;
+      font-weight: 500;
+    }
 
-button {
-  padding:8px 18px;
-  margin-right:8px;
-  cursor:pointer;
-  border:1px solid #999;
-  background:#f5f5f5;
-  font-weight:500;
-}
+    button:hover {
+      background: #e0e0e0;
+    }
 
-button:hover {
-  background:#e0e0e0;
-}
+    /* ===== MAIN TABLE ===== */
+    table.main {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-/* ===== MAIN TABLE ===== */
-table.main {
-  width:100%;
-  border-collapse:collapse;
-}
+    table.main th {
+      background: #f3f3f3;
+      border: 1px solid #bbb;
+      padding: 8px;
+      font-weight: 600;
+    }
 
-table.main th {
-  background:#f3f3f3;
-  border:1px solid #bbb;
-  padding:8px;
-  font-weight:600;
-}
+    table.main td {
+      border: 1px solid #ddd;
+      padding: 6px;
+      text-align: center;
+    }
 
-table.main td {
-  border:1px solid #ddd;
-  padding:6px;
-  text-align:center;
-}
+    table.main input {
+      width: 100%;
+      border: none;
+      text-align: center;
+    }
 
-table.main input {
-  width:100%;
-  border:none;
-  text-align:center;
-}
+    table.main input:focus {
+      outline: none;
+      background: #fafafa;
+    }
 
-table.main input:focus {
-  outline:none;
-  background:#fafafa;
-}
+    /* ===== DELETE BUTTON ===== */
+    .delete-btn {
+      background: #ffdddd;
+      border: 1px solid #ff8888;
+    }
 
-/* ===== DELETE BUTTON ===== */
-.delete-btn {
-  background:#ffdddd;
-  border:1px solid #ff8888;
-}
+    .delete-btn:hover {
+      background: #ffcccc;
+    }
 
-.delete-btn:hover {
-  background:#ffcccc;
-}
-
-/* ===== TOTAL ===== */
-.total-box {
-  text-align:right;
-  font-size:18px;
-  margin-top:20px;
-  font-weight:600;
-}
-
-</style>
+    /* ===== TOTAL ===== */
+    .total-box {
+      text-align: right;
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-<div class="company-header">
-  <h1>AADESH CONSTRUCTION</h1>
-  <h3>Measurement Sheet</h3>
-</div>
-<div class="line"></div>
+    <div class="company-header">
+      <h1>AADESH CONSTRUCTION</h1>
+      <h3>Measurement Sheet</h3>
+    </div>
+    <div class="line"></div>
 
-<table class="info-table">
-<tr>
-  <th>CLIENT DETAILS</th>
-  <th>PROJECT DETAILS</th>
-</tr>
-<tr>
-  <td>
-    <div class="field">
-      <label>Name:</label>
-      <input id="name">
+    <table class="info-table">
+      <tr>
+        <th>CLIENT DETAILS</th>
+        <th>PROJECT DETAILS</th>
+      </tr>
+      <tr>
+        <td>
+          <div class="field">
+            <label>Name:</label>
+            <input id="name">
+          </div>
+
+          <div class="field">
+            <label>Mobile:</label>
+            <input id="mobile" maxlength="10">
+          </div>
+
+          <div class="field">
+            <label>Address:</label>
+            <input id="address">
+          </div>
+        </td>
+
+        <td>
+          <div class="field">
+            <label>Work Name:</label>
+            <input id="work">
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="actions">
+      <button onclick="addRow()">+ Add Row</button>
+      <button onclick="generate()">Generate PDF</button>
     </div>
 
-    <div class="field">
-      <label>Mobile:</label>
-      <input id="mobile" maxlength="10">
+    <table class="main" id="tbl">
+      <thead>
+        <tr>
+          <th>Item<br />(આઇટમ)</th>
+          <th>No.<br />(નંબર)</th>
+          <th>Length<br />(લંબાઈ)</th>
+          <th>Breadth<br />(પહોળાઈ)</th>
+          <th>Total Quantity<br />(કુલ માપ)</th>
+          <th>Price<br />(કિંમત)</th>
+          <th>Total Price <br /> (કુલ કિંમત)</th>
+          <th>❌</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="total-box">
+      Grand Total: ₹ <span id="grand">0</span>
     </div>
 
-    <div class="field">
-      <label>Address:</label>
-      <input id="address">
-    </div>
-  </td>
+  </div>
 
-  <td>
-    <div class="field">
-      <label>Work Name:</label>
-      <input id="work">
-    </div>
-  </td>
-</tr>
-</table>
+  <script>
 
-<div class="actions">
-  <button onclick="addRow()">+ Add Row</button>
-  <button onclick="generate()">Generate PDF</button>
-</div>
+    function addRow() {
+      const tr = document.createElement("tr");
 
-<table class="main" id="tbl">
-<thead>
-<tr>
-  <th>Item</th>
-  <th>No</th>
-  <th>Length</th>
-  <th>Breadth</th>
-  <th>Quantity</th>
-  <th>Price</th>
-  <th>Total Price</th>
-  <th>❌</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-
-<div class="total-box">
-  Grand Total: ₹ <span id="grand">0</span>
-</div>
-
-</div>
-
-<script>
-
-function addRow() {
-  const tr = document.createElement("tr");
-
-  tr.innerHTML = `
+      tr.innerHTML = `
     <td><input></td>
     <td><input type="number" value="1"></td>
     <td><input type="number" step="any"></td>
     <td><input type="number" step="any"></td>
-    <td><input type="number"></td>
-    <td><input type="number" class="price"></td>
-    <td><input readonly></td>
+    <td><input type="number" step="any"></td>
+    <td><input type="number" class="price" step="any"></td>
+    <td><input readonly step="any"></td>
     <td><button class="delete-btn" onclick="this.closest('tr').remove(); calc()">X</button></td>
   `;
 
-  tr.querySelectorAll("input").forEach(i => i.oninput = calc);
-  document.querySelector("#tbl tbody").appendChild(tr);
-}
+      const inputs = tr.querySelectorAll("input");
 
-function calc() {
-  let grandTotal = 0;
+      const updateQty = () => {
+        // Parse values, defaulting to 1 for multiplication if empty
+        const no = inputs[1].value === "" ? 1 : Number(inputs[1].value);
+        const l = inputs[2].value === "" ? 1 : Number(inputs[2].value);
+        const b = inputs[3].value === "" ? 1 : Number(inputs[3].value);
 
-  document.querySelectorAll("#tbl tbody tr").forEach(tr => {
-    const i = tr.querySelectorAll("input");
+        // Update Total Quantity if any of the three fields have an input
+        if (inputs[1].value !== "" || inputs[2].value !== "" || inputs[3].value !== "") {
+          const qty = no * l * b;
+          inputs[4].value = parseFloat(qty.toFixed(4));
+        } else {
+          inputs[4].value = "";
+        }
 
-    const quantity = Number(i[4].value) || 0;
-    const price = Number(i[5].value) || 0;
+        calc(); // Recalculate total price
+      };
 
-    const total_price = quantity * price;
-    i[6].value = total_price;
+      inputs[0].oninput = calc;
+      inputs[1].oninput = updateQty;
+      inputs[2].oninput = updateQty;
+      inputs[3].oninput = updateQty;
+      inputs[4].oninput = calc; // Total Quantity manually editable
+      inputs[5].oninput = calc; // Price editable
 
-    grandTotal += total_price;
-  });
+      document.querySelector("#tbl tbody").appendChild(tr);
+    }
 
-  document.getElementById("grand").innerText = grandTotal;
-}
+    function calc() {
+      let grandTotal = 0;
 
-function generate() {
+      document.querySelectorAll("#tbl tbody tr").forEach(tr => {
+        const i = tr.querySelectorAll("input");
 
-  const mobile = document.getElementById("mobile").value.trim();
+        const quantity = Number(i[4].value) || 0;
+        const price = Number(i[5].value) || 0;
 
-  if (!/^[6-9][0-9]{9}$/.test(mobile)) {
-    alert("Enter valid 10 digit Indian mobile number");
-    return;
-  }
+        const total_price = quantity * price;
+        i[6].value = total_price;
 
-  const rows = [];
+        grandTotal += total_price;
+      });
 
-  document.querySelectorAll("#tbl tbody tr").forEach(tr => {
-    const i = tr.querySelectorAll("input");
+      document.getElementById("grand").innerText = grandTotal;
+    }
 
-    rows.push({
-      item: i[0].value,
-      no: Number(i[1].value),
-      length: Number(i[2].value),
-      breadth: Number(i[3].value),
-      quantity: Number(i[4].value),
-      price: Number(i[5].value),
-      total_price: Number(i[6].value)
-    });
-  });
+    function generate() {
 
-  const payload = {
-    header: {
-      name: document.getElementById("name").value,
-      mobile: mobile,
-      address: document.getElementById("address").value,
-      work_name: document.getElementById("work").value
-    },
-    rows: rows,
-    total: Number(document.getElementById("grand").innerText)
-  };
+      const mobile = document.getElementById("mobile").value.trim();
 
-  fetch("/pdf", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.blob())
-  .then(blob => {
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "measurement_sheet.pdf";
-    a.click();
-  });
-}
+      if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+        alert("Enter valid 10 digit Indian mobile number");
+        return;
+      }
 
-addRow();
+      const rows = [];
 
-</script>
+      document.querySelectorAll("#tbl tbody tr").forEach(tr => {
+        const i = tr.querySelectorAll("input");
+
+        rows.push({
+          item: i[0].value,
+          no: Number(i[1].value),
+          length: Number(i[2].value),
+          breadth: Number(i[3].value),
+          quantity: Number(i[4].value),
+          price: Number(i[5].value),
+          total_price: Number(i[6].value)
+        });
+      });
+
+      const payload = {
+        header: {
+          name: document.getElementById("name").value,
+          mobile: mobile,
+          address: document.getElementById("address").value,
+          work_name: document.getElementById("work").value
+        },
+        rows: rows,
+        total: Number(document.getElementById("grand").innerText)
+      };
+
+      fetch("/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(res => res.blob())
+        .then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "measurement_sheet.pdf";
+          a.click();
+        });
+    }
+
+    addRow();
+
+  </script>
 
 </body>
+
 </html>

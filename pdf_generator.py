@@ -248,12 +248,12 @@ def create_pdf(rows, total, header):
     data = [[
         Paragraph("Item No<br/>(આઇટમ નંબર)", th),
         Paragraph("Items<br/>(આઇટમ)", th),
-        Paragraph("No<br/>(નંબર)", th),
+        Paragraph("No.<br/>(નંબર)", th),
         Paragraph("Length<br/>(લંબાઈ)", th),
         Paragraph("Breadth<br/>(પહોળાઈ)", th),
         Paragraph("Total Quantity<br/>(કુલ માપ)", th),
-        Paragraph("Price<br/>(દર)", th),
-        Paragraph("Total Price<br/>(કુલ રકમ)", th),
+        Paragraph("Price<br/>(કિંમત)", th),
+        Paragraph("Total Price<br/>(કુલ કિંમત)", th),
     ]]
 
     for i, r in enumerate(rows, start=1):
